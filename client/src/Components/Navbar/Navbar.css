@@ -1,0 +1,24 @@
+.navbar {
+    color: rgb(255, 255, 255);
+    height: 130px;
+  }
+
+  #header {
+    font-size: 70px;
+    color: rgb(255, 255, 255);
+  }
+
+  #navBtns {
+    font-size: 30px;
+    padding-right: 10px;
+  }
+
+  #searchLink {
+    color: #6495c2;
+    font-size: 40px;
+  }
+
+  #savedLink {
+    color: #6495c2;
+    font-size: 40px;
+  }
