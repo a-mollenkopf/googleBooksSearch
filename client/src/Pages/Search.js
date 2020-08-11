@@ -18,10 +18,25 @@ class Search extends Component {
     e.preventDefault();
     API.getGoogleSearchBooks(this.state.search)
       .then((res) => {
-        this.setState({ books: res.data.items }, function () {
-        });
+        this.setState({ books: res.data.items }, function () {});
       })
       .catch((err) => console.log(err));
+  };
+
+  // I need to add a function to handle the save onClick when you try to save a book and have it render on the saved books page.
+  handleSaveBook = (e) => {
+    e.preventDefault();
+    const arrayOfBooks = this.state.books;
+    //use filter to save book into new array of saved books
+    const filteredArray = arrayOfBooks.filter((book) => book._id === e.target._id);
+    const savedBooks = filteredArray[0];
+    console.log(savedBooks);
+
+    API.saveBook(savedBooks)
+      .then(this.setState({ message: alert("Book is saved") }))
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   render() {
@@ -74,8 +89,12 @@ class Search extends Component {
                       View
                     </a>
                     <button
+                      id={books._id}
+                      onClick={(e) => this.handleSaveBook(e)}
                       className="btn badge-pill btn-outline-warning mt-3 ml-3"
-                    >Save</button>
+                    >
+                      Save
+                    </button>
                   </div>
                 </div>
               </div>
