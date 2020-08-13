@@ -23,12 +23,13 @@ class Search extends Component {
       .catch((err) => console.log(err));
   };
 
+
+  // I need to add a function to handle the save onClick when you try to save a book and have it render on the saved books page.
   handleSaveBook = (e) => {
     e.preventDefault();
     const arrayOfBooks = this.state.books;
-    const filteredArray = arrayOfBooks.filter(
-      (book) => book._id === e.target._id
-    );
+    //use filter to save book into new array of saved books
+    const filteredArray = arrayOfBooks.filter((book) => book._id === e.target._id);
     const savedBooks = filteredArray[0];
     console.log(savedBooks);
 
