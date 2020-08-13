@@ -23,6 +23,7 @@ class Search extends Component {
       .catch((err) => console.log(err));
   };
 
+
   // I need to add a function to handle the save onClick when you try to save a book and have it render on the saved books page.
   handleSaveBook = (e) => {
     e.preventDefault();
@@ -82,9 +83,10 @@ class Search extends Component {
                     </h5>
                     <p className="card-text">{books.volumeInfo.description}</p>
                     <a
-                      href={books.volumeInfo.link}
+                      href={books.volumeInfo.infoLink}
                       className="btn badge-pill btn-outline-dark mt-3"
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       View
                     </a>

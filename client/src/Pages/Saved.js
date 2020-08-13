@@ -6,6 +6,16 @@ class Saved extends Component {
     savedBooks: [],
   };
 
+  getSavedBook = (e) => {
+    API.getBooks()
+      .then((res) => {
+        this.setState({ savedBooks: res.data.items }, function () {
+          console.log(this.state.savedBooks);
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
   componentDidMount() {
     API.getGoogleSearchBooks()
       .then((res) => {
