@@ -6,6 +6,16 @@ class Saved extends Component {
     savedBooks: [],
   };
 
+  getSavedBook = (e) => {
+    API.getBooks()
+      .then((res) => {
+        this.setState({ savedBooks: res.data.items }, function () {
+          console.log(this.state.savedBooks);
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
   componentDidMount() {
     API.getBooks()
       .then((res) => this.setState({ savedBooks: res.data }))
@@ -23,22 +33,25 @@ class Saved extends Component {
       <div>
         <div className="container">
           <h2>Saved Books</h2>
-          {this.state.savedBooks.map((savedBooks) => (
-            <div className="card mb-3" key={savedBooks._id}>
+          {this.state.savedBooks.map((book) => (
+            <div className="card mb-3" key={book._id}>
               <div className="row">
                 <div className="col-md-4">
                   <img
-                    src={savedBooks.volumeInfo.imageLinks.thumbnail}
+                    src={book.volumeInfo.imageLinks.thumbnail}
                     className="card-img"
-                    alt={savedBooks.volumeInfo.title}
+                    alt={book.volumeInfo.title}
                   ></img>
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">
                     <h5 className="card-title">
-                      {savedBooks.volumeInfo.title} by {savedBooks.volumeInfo.authors}
+                      {book.volumeInfo.title} by{" "}
+                      {book.volumeInfo.authors}
                     </h5>
-                    <p className="card-text">{savedBooks.volumeInfo.description}</p>
+                    <p className="card-text">
+                      {book.volumeInfo.description}
+                    </p>
                   </div>
                 </div>
               </div>

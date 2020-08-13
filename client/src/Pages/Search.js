@@ -18,10 +18,25 @@ class Search extends Component {
     e.preventDefault();
     API.getGoogleSearchBooks(this.state.search)
       .then((res) => {
-        this.setState({ books: res.data.items }, function () {
-        });
+        this.setState({ books: res.data.items }, function () {});
       })
       .catch((err) => console.log(err));
+  };
+
+  handleSaveBook = (e) => {
+    e.preventDefault();
+    const arrayOfBooks = this.state.books;
+    const filteredArray = arrayOfBooks.filter(
+      (book) => book._id === e.target._id
+    );
+    const savedBooks = filteredArray[0];
+    console.log(savedBooks);
+
+    API.saveBook(savedBooks)
+      .then(this.setState({ message: alert("Book is saved") }))
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   render() {
@@ -67,15 +82,20 @@ class Search extends Component {
                     </h5>
                     <p className="card-text">{books.volumeInfo.description}</p>
                     <a
-                      href={books.volumeInfo.link}
+                      href={books.volumeInfo.infoLink}
                       className="btn badge-pill btn-outline-dark mt-3"
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       View
                     </a>
                     <button
+                      id={books._id}
+                      onClick={(e) => this.handleSaveBook(e)}
                       className="btn badge-pill btn-outline-warning mt-3 ml-3"
-                    >Save</button>
+                    >
+                      Save
+                    </button>
                   </div>
                 </div>
               </div>
